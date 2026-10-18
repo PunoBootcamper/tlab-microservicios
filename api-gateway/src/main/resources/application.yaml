@@ -10,7 +10,7 @@ spring:
             - id: client-api
               uri: ${CLIENT_API_URI:http://localhost:8080}
               predicates:
-                - Path=/api/clients/**
+                - Path=/api/clientss/**
             - id: product-api
               uri: ${PRODUCT_API_URI:http://localhost:8081}
               predicates:
