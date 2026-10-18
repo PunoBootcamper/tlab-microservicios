@@ -4,3 +4,5 @@ spring:
 
   profiles:
     active: ${SPRING_PROFILE_ACTIVE:cer}
+server:
+  port: ${PORT:8080}
