@@ -1,0 +1,38 @@
+@if (cart.open()) {
+  <div class="backdrop" (click)="cart.close()"></div>
+}
+<aside class="panel" [class.open]="cart.open()" aria-label="Carrito de compras">
+  <div class="panel-header">
+    <h2>Carrito</h2>
+    <button type="button" class="icon-btn" aria-label="Cerrar carrito" (click)="cart.close()">✕</button>
+  </div>
+
+  @if (cart.items().length === 0) {
+    <p class="empty">Tu carrito está vacío.</p>
+  } @else {
+    <ul class="items">
+      @for (item of cart.items(); track item.product.id) {
+        <li class="item">
+          <img [src]="item.product.imageUrl || placeholder" [alt]="item.product.name" />
+          <div class="info">
+            <strong>{{ item.product.name }}</strong>
+            <span>{{ item.product.price | currency }}</span>
+            <div class="qty">
+              <button type="button" (click)="cart.decrease(item.product.id)" aria-label="Disminuir">−</button>
+              <span>{{ item.quantity }}</span>
+              <button type="button" (click)="cart.increase(item.product.id)" aria-label="Aumentar">+</button>
+            </div>
+          </div>
+          <button type="button" class="icon-btn" aria-label="Quitar" (click)="cart.remove(item.product.id)">🗑</button>
+        </li>
+      }
+    </ul>
+    <div class="footer">
+      <div class="total">
+        <span>Total</span>
+        <strong>{{ cart.total() | currency }}</strong>
+      </div>
+      <button type="button" class="secondary" (click)="cart.clear()">Vaciar carrito</button>
+    </div>
+  }
+</aside>

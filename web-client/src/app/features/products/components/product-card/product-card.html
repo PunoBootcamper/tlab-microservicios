@@ -1,0 +1,12 @@
+<article class="card">
+  <img [src]="product().imageUrl || placeholder" [alt]="product().name" />
+  <div class="body">
+    <h3>{{ product().name }}</h3>
+    <p class="description">{{ product().description }}</p>
+    <div class="row">
+      <strong class="price">{{ product().price | currency }}</strong>
+      <span class="status">{{ product().status }}</span>
+    </div>
+    <button type="button" (click)="add.emit(product())">Agregar al carrito</button>
+  </div>
+</article>

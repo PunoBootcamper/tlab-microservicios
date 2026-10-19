@@ -1,0 +1,15 @@
+<h1>Productos</h1>
+
+@if (state().loading) {
+  <p class="message">Cargando productos…</p>
+} @else if (state().error) {
+  <p class="message error">No se pudieron cargar los productos.</p>
+} @else if (state().products.length === 0) {
+  <p class="message">No hay productos disponibles.</p>
+} @else {
+  <div class="grid">
+    @for (product of state().products; track product.id) {
+      <app-product-card [product]="product" (add)="addToCart($event)" />
+    }
+  </div>
+}

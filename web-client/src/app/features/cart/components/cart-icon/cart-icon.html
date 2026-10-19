@@ -1,0 +1,6 @@
+<button type="button" class="cart-btn" aria-label="Abrir carrito" (click)="cart.toggle()">
+  🛒
+  @if (cart.count() > 0) {
+    <span class="badge">{{ cart.count() }}</span>
+  }
+</button>
