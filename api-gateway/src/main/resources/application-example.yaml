@@ -15,12 +15,12 @@ spring:
               predicates:
                 - Path=/api/clients/**
             - id: product-api
-              uri: ${services.product-api.uri:http://localhost:8081}
+              uri: ${services.product-api.uri}
               predicates:
                 - Path=/api/products/**
 
 
 security:
   cloud-run-auth:
-    enabled: true
+    enabled: ${CLOUD_RUN_AUTH_ENABLED:false}
 
