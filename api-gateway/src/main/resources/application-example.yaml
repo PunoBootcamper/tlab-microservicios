@@ -1,0 +1,26 @@
+services:
+  client-api:
+    uri: ${CLIENT_API_URI:http://localhost:8080}
+  product-api:
+    uri: ${PRODUCT_API_URI:http://localhost:8081}
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: client-api
+              uri: ${services.client-api.uri}
+              predicates:
+                - Path=/api/clients/**
+            - id: product-api
+              uri: ${services.product-api.uri:http://localhost:8081}
+              predicates:
+                - Path=/api/products/**
+
+
+security:
+  cloud-run-auth:
+    enabled: true
+

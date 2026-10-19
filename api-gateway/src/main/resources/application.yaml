@@ -2,19 +2,10 @@ spring:
   application:
     name: api-gateway
 
-  cloud:
-    gateway:
-      server:
-        webflux:
-          routes:
-            - id: client-api
-              uri: ${CLIENT_API_URI:http://localhost:8080}
-              predicates:
-                - Path=/api/clients/**
-            - id: product-api
-              uri: ${PRODUCT_API_URI:http://localhost:8081}
-              predicates:
-                - Path=/api/products/**
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE:dev}
 
 server:
   port: ${PORT:8083}
+
+
