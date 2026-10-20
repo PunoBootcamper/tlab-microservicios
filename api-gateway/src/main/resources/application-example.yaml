@@ -3,6 +3,8 @@ services:
     uri: ${CLIENT_API_URI:http://localhost:8080}
   product-api:
     uri: ${PRODUCT_API_URI:http://localhost:8081}
+  order-api:
+    uri: ${ORDER_API_URI:http://localhost:8084}
 
 spring:
   cloud:
@@ -31,6 +33,10 @@ spring:
               uri: ${services.product-api.uri}
               predicates:
                 - Path=/api/products/**
+            - id: order-api
+              uri: ${services.order-api.uri}
+              predicates:
+                - Path=/api/orders/**
 
 
 security:
