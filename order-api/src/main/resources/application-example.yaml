@@ -1,0 +1,10 @@
+client:
+  service:
+    url: ${CLIENT_SERVICE_URL:http://localhost:8083/api/clients}
+
+product:
+  service:
+    url: ${PRODUCT_SERVICE_URL:http://localhost:8083/api/products}
+
+server:
+  port: ${PORT:8084}

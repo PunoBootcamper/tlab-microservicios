@@ -3,6 +3,5 @@ spring:
         name: order-api
 
     profiles:
-      active: dev
-server:
-  port: 8084
+      active: ${SPRING_PROFILE_ACTIVE:dev}
+
