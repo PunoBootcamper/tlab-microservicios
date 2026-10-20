@@ -3,7 +3,5 @@ spring:
     name: product-api
 
   profiles:
-    active: ${SPRING_PROFILE_ACTIVE:dev}
+    active: ${SPRING_PROFILE_ACTIVE:cer}
 
-server:
-  port: ${PORT:8081}
