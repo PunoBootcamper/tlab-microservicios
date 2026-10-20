@@ -1,6 +1,7 @@
 package com.tecylab.product_api.service.impl;
 
 import com.tecylab.product_api.OperationLog;
+import com.tecylab.product_api.dto.ProductLookupResponse;
 import com.tecylab.product_api.dto.ProductRequest;
 import com.tecylab.product_api.dto.ProductResponse;
 import com.tecylab.product_api.exception.ProductNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,5 +61,33 @@ public class ProductServiceImpl implements ProductService {
         productMapper.updateEntity(updatedProduct, existingProduct);
         Product savedProduct = productRepository.save(existingProduct);
         return productMapper.toResponse(savedProduct);
+    }
+
+    @Override
+    public List<ProductLookupResponse> findProductsByIdList(List<Long> ids) {
+        Map<Long, Product> productsById = productRepository.findByIdIn(ids)
+                .stream()
+                .collect(Collectors.toMap(
+                        Product::getId,
+                        product -> product
+                ));
+
+        return ids.stream()
+                .map(id -> {
+                    Product product = productsById.get(id);
+
+                    return product != null
+                            ? productMapper.toLookupResponse(product)
+                            : new ProductLookupResponse(
+                            id,
+                            null,
+                            null,
+                            null,
+                            null,
+                            false
+                    );
+                })
+                .toList();
+
     }
 }
